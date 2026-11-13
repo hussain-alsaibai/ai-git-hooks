@@ -1,10 +1,13 @@
 """Code diff scanning and analysis."""
 
+
+from __future__ import annotations
+
 import hashlib
 import json
 from pathlib import Path
 
-from git import Repo
+from git import InvalidGitRepositoryError, NoSuchPathError, Repo
 
 from ai_git_hooks.config import Config
 from ai_git_hooks.providers import LLMProvider
@@ -23,7 +26,7 @@ class DiffScanner:
         """Scan current changes and return findings."""
         try:
             repo = Repo(search_parent_directories=True)
-        except Exception:
+        except (InvalidGitRepositoryError, NoSuchPathError):
             raise RuntimeError("Not in a git repository")
         
         # Get diff
@@ -56,7 +59,7 @@ class DiffScanner:
         """Scan a specific file."""
         try:
             repo = Repo(search_parent_directories=True)
-        except Exception:
+        except (InvalidGitRepositoryError, NoSuchPathError):
             raise RuntimeError("Not in a git repository")
         
         if staged_only:

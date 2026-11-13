@@ -1,9 +1,11 @@
 """Configuration management for AI Git Hooks."""
 
+
+from __future__ import annotations
+
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
 import yaml
 
@@ -14,8 +16,8 @@ class Config:
     
     provider: str = "ollama"
     model: str = "codellama"
-    api_key: Optional[str] = None
-    api_url: Optional[str] = None
+    api_key: str | None = None
+    api_url: str | None = None
     
     # Security rules
     rules: dict = field(default_factory=lambda: {
@@ -64,7 +66,7 @@ Changes:
     })
     
     @classmethod
-    def from_dict(cls, data: dict) -> "Config":
+    def from_dict(cls, data: dict) -> Config:
         """Create Config from dictionary."""
         return cls(
             provider=data.get("provider", "ollama"),

@@ -1,9 +1,12 @@
 """Git hook installation and management."""
 
+
+from __future__ import annotations
+
 import stat
 from pathlib import Path
 
-from git import Repo
+from git import InvalidGitRepositoryError, NoSuchPathError, Repo
 
 HOOK_TEMPLATE = """#!/bin/sh
 # AI Git Hooks - {hook_name}
@@ -33,7 +36,7 @@ def get_git_dir() -> Path:
     try:
         repo = Repo(search_parent_directories=True)
         return Path(repo.git_dir)
-    except Exception:
+    except (InvalidGitRepositoryError, NoSuchPathError):
         raise RuntimeError("Not a git repository (or any of the parent directories)")
 
 

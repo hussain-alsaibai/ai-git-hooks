@@ -37,6 +37,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
+    "ruff==0.17.5",
     "pytest-cov>=4.0",
     "black>=23.0",
     "flake8>=6.0",
@@ -72,3 +73,9 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+
+[tool.ruff]
+# Pin the rule set so a ruff upgrade cannot silently change what CI enforces.
+# CI installs this exact version from the dev extras.
+target-version = "py38"
+line-length = 100

@@ -24,7 +24,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip pytest ruff
+          python -m pip install --upgrade pip
+          # Pinned: an unpinned ruff changed the enforced ruleset between runs,
+          # so a green local lint and a red CI lint could both be "correct".
+          python -m pip install pytest ruff==0.17.5
           python -m pip install -e .
       - name: Lint
         run: ruff check .

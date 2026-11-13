@@ -1,5 +1,8 @@
 """Hook runner - called by Git hooks."""
 
+
+from __future__ import annotations
+
 import sys
 
 from ai_git_hooks.config import load_config

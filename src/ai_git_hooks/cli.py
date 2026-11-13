@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """AI Git Hooks - CLI entry point."""
 
+from __future__ import annotations
+
 import sys
 from pathlib import Path
 
@@ -21,7 +23,6 @@ console = Console()
 @click.version_option(version="0.1.0")
 def cli() -> None:
     """AI-powered Git hooks for automated code review and security scanning."""
-    pass
 
 
 @cli.command()
@@ -84,7 +85,7 @@ def install(force: bool, hooks: tuple) -> None:
         
         console.print(table)
         
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - a CLI reports the error, not a traceback
         console.print(f"[red]Error installing hooks: {e}[/red]")
         sys.exit(1)
 
@@ -95,7 +96,7 @@ def uninstall() -> None:
     try:
         uninstall_hooks()
         console.print("[green]Hooks uninstalled.[/green]")
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - a CLI reports the error, not a traceback
         console.print(f"[red]Error: {e}[/red]")
         sys.exit(1)
 
@@ -120,7 +121,7 @@ def review(staged_only: bool, output: str) -> None:
         else:
             _display_findings(findings)
             
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - a CLI reports the error, not a traceback
         console.print(f"[red]Error during review: {e}[/red]")
         sys.exit(1)
 

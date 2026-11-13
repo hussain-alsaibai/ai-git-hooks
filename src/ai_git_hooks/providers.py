@@ -1,5 +1,8 @@
 """LLM provider abstractions for AI Git Hooks."""
 
+
+from __future__ import annotations
+
 import os
 from abc import ABC, abstractmethod
 
@@ -17,12 +20,10 @@ class LLMProvider(ABC):
     @abstractmethod
     def review(self, diff: str) -> list[dict]:
         """Review code diff and return findings."""
-        pass
     
     @abstractmethod
     def generate_commit_message(self, diff: str) -> str:
         """Generate commit message from diff."""
-        pass
     
     def _parse_response(self, content: str) -> list[dict]:
         """Parse LLM response into structured findings."""
