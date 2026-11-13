@@ -1,9 +1,7 @@
 """LLM provider abstractions for AI Git Hooks."""
 
-import json
 import os
 from abc import ABC, abstractmethod
-from typing import Any, Optional
 
 import requests
 
@@ -38,7 +36,7 @@ class LLMProvider(ABC):
             # Try to parse structured format: [SEVERITY] CATEGORY: Message
             if line.startswith("["):
                 import re
-                match = re.match(r\'\'\'\[(\w+)\]\s*(\w+):\s*(.+)\'\'\', line)
+                match = re.match(r"\[(\w+)\]\s*(\w+):\s*(.+)", line)
                 if match:
                     severity, category, message = match.groups()
                     findings.append({

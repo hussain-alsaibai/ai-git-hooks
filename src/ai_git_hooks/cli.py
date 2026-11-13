@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """AI Git Hooks - CLI entry point."""
 
-import os
 import sys
 from pathlib import Path
 
@@ -10,7 +9,7 @@ import yaml
 from rich.console import Console
 from rich.table import Table
 
-from ai_git_hooks.config import Config, load_config
+from ai_git_hooks.config import load_config
 from ai_git_hooks.hooks import install_hooks, uninstall_hooks
 from ai_git_hooks.providers import get_provider
 from ai_git_hooks.scanner import DiffScanner

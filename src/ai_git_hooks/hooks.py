@@ -1,6 +1,5 @@
 """Git hook installation and management."""
 
-import os
 import stat
 from pathlib import Path
 
